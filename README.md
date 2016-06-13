@@ -1,0 +1,2 @@
+# simple_mailing_service
+simple_mailing_service

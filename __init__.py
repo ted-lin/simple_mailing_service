@@ -3,8 +3,12 @@
 """
 tech crunch parser
 """
+try:
+	from BeautifulSoup import BeautifulSoup
+except ImportError:
+	""" compatible mac os """
+	from bs4 import BeautifulSoup
 
-from BeautifulSoup import BeautifulSoup
 import urllib2
 import re
 import unicodedata
@@ -27,7 +31,7 @@ def unicode2ascii(ustr):
 def parse_tech_crunch(dump=False):
 	global uniurls
 	html_page = urllib2.urlopen(target)
-	soup = BeautifulSoup(html_page)
+	soup = BeautifulSoup(html_page, "html.parser")
 
 	for link in soup.findAll('a', attrs = {'href': re.compile("/[0-9]*/[0-9]*/[0-9]*")}):
 		astr=unicode2ascii(link.get('href'))
